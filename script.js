@@ -1,9 +1,8 @@
 const carPrices = [
     { min: 500, max: 750, step: 50 },
-    { min: 750, max: 1500, step: 100, "выигрышная цена": 850 }, // Enclose "выигрышная цена" in quotation marks
-    { min: 15000, max: 25000, step: 1000, "выигрышная цена": 19000 } // Enclose "выигрышная цена" in quotation marks
+    { min: 750, max: 1500, step: 100 },
+    { min: 15000, max: 25000, step: 1000 }
 ];
-
 
 const carCards = document.querySelectorAll('.car-card');
 const buyButtons = document.querySelectorAll('.car-card button');
@@ -32,7 +31,7 @@ for (let i = 0; i < carCards.length; i++) {
         currentPrice -= 50;
 
         // Проверка на достижение "выигрышной" цены
-        if (currentPrice === carPrices[i]["выигрышная" цена]) { // Изменение
+        if (currentPrice === 550) {
             // **Изменение:** Сообщение выводится только при нажатии кнопки
             buyButton.addEventListener('click', () => {
                 clearInterval(intervalId);
