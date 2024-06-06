@@ -9,3 +9,55 @@ const buyButtons = document.querySelectorAll('.car-card button');
 const messages = document.querySelectorAll('.car-card .message');
 
 for (let i = 0; i < carCards.length; i++) {
+    const card = carCards[i];
+    const priceElement = card.querySelector('#price' + (i + 1));
+    const buyButton = buyButtons[i];
+    const message = messages[i];
+
+    
+    function generateRandomPrice(range) {
+        const min = range.min;
+        const max = range.max;
+        const step = range.step;
+        let price = Math.floor(Math.random() * ((max - min) / step)) * step + min;
+        return price;
+    }
+
+    let currentPrice = generateRandomPrice(carPrices[i]);
+    priceElement.textContent = currentPrice;
+
+    
+    let intervalId = setInterval(() => {
+        currentPrice -= 50;
+
+        
+        if (currentPrice === 550) {
+            clearInterval(intervalId);
+            buyButton.disabled = true;
+            message.textContent = 'Вы успешно купили автомобиль!';
+            message.classList.add('success');
+            message.style.display = 'block';
+        }
+
+        
+        priceElement.textContent = currentPrice;
+
+        // Проверка на то, что цена достигла минимума
+        if (currentPrice < carPrices[i].min) {
+            clearInterval(intervalId);
+            buyButton.disabled = true;
+            message.textContent = 'К сожалению, акция закончилась.';
+            message.classList.add('error');
+            message.style.display = 'block';
+        }
+    }, 1000);
+
+    // Обработчик события нажатия кнопки "Купить"
+    buyButton.addEventListener('click', () => {
+        clearInterval(intervalId);
+        buyButton.disabled = true;
+        message.textContent = 'Вы успешно купили автомобиль!';
+        message.classList.add('success');
+        message.style.display = 'block';
+    });
+}
