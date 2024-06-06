@@ -1,7 +1,7 @@
 const carPrices = [
     { min: 500, max: 750, step: 50 },
-    { min: 750, max: 1500, step: 100, **"выигрышная" цена:** 850 }, 
-    { min: 15000, max: 25000, step: 1000, **"выигрышная" цена:** 19000 } 
+    { min: 750, max: 1500, step: 100, **"выигрышная" цена:** 850 }, // Изменение
+    { min: 15000, max: 25000, step: 1000, **"выигрышная" цена:** 19000 } // Изменение
 ];
 
 const carCards = document.querySelectorAll('.car-card');
@@ -14,7 +14,7 @@ for (let i = 0; i < carCards.length; i++) {
     const buyButton = buyButtons[i];
     const message = messages[i];
 
-   
+    // Сгенерировать случайную цену в заданном диапазоне
     function generateRandomPrice(range) {
         const min = range.min;
         const max = range.max;
@@ -26,12 +26,13 @@ for (let i = 0; i < carCards.length; i++) {
     let currentPrice = generateRandomPrice(carPrices[i]);
     priceElement.textContent = currentPrice;
 
-   
+    // Снижать цену каждые 1 секунду
     let intervalId = setInterval(() => {
         currentPrice -= 50;
 
-        
-        if (currentPrice === carPrices[i]["выигрышная" цена]) { 
+        // Проверка на достижение "выигрышной" цены
+        if (currentPrice === carPrices[i]["выигрышная" цена]) { // Изменение
+            // **Изменение:** Сообщение выводится только при нажатии кнопки
             buyButton.addEventListener('click', () => {
                 clearInterval(intervalId);
                 buyButton.disabled = true;
@@ -41,10 +42,10 @@ for (let i = 0; i < carCards.length; i++) {
             });
         }
 
-        
+        // Обновление цены на карточке
         priceElement.textContent = currentPrice;
 
-        
+        // Проверка на то, что цена достигла минимума
         if (currentPrice < carPrices[i].min) {
             clearInterval(intervalId);
             buyButton.disabled = true;
