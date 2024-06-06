@@ -14,7 +14,7 @@ for (let i = 0; i < carCards.length; i++) {
     const buyButton = buyButtons[i];
     const message = messages[i];
 
-    
+    // Сгенерировать случайную цену в заданном диапазоне
     function generateRandomPrice(range) {
         const min = range.min;
         const max = range.max;
@@ -26,20 +26,23 @@ for (let i = 0; i < carCards.length; i++) {
     let currentPrice = generateRandomPrice(carPrices[i]);
     priceElement.textContent = currentPrice;
 
-    
+    // Снижать цену каждые 1 секунду
     let intervalId = setInterval(() => {
         currentPrice -= 50;
 
-        
+        // Проверка на достижение "выигрышной" цены
         if (currentPrice === 550) {
-            clearInterval(intervalId);
-            buyButton.disabled = true;
-            message.textContent = 'Вы успешно купили автомобиль!';
-            message.classList.add('success');
-            message.style.display = 'block';
+            // **Изменение:** Сообщение выводится только при нажатии кнопки
+            buyButton.addEventListener('click', () => {
+                clearInterval(intervalId);
+                buyButton.disabled = true;
+                message.textContent = 'Вы успешно купили автомобиль!';
+                message.classList.add('success');
+                message.style.display = 'block';
+            });
         }
 
-        
+        // Обновление цены на карточке
         priceElement.textContent = currentPrice;
 
         // Проверка на то, что цена достигла минимума
@@ -51,13 +54,4 @@ for (let i = 0; i < carCards.length; i++) {
             message.style.display = 'block';
         }
     }, 1000);
-
-    // Обработчик события нажатия кнопки "Купить"
-    buyButton.addEventListener('click', () => {
-        clearInterval(intervalId);
-        buyButton.disabled = true;
-        message.textContent = 'Вы успешно купили автомобиль!';
-        message.classList.add('success');
-        message.style.display = 'block';
-    });
 }
