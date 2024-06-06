@@ -1,8 +1,9 @@
 const carPrices = [
     { min: 500, max: 750, step: 50 },
-    { min: 750, max: 1500, step: 100, **"выигрышная" цена:** 850 }, // Изменение
-    { min: 15000, max: 25000, step: 1000, **"выигрышная" цена:** 19000 } // Изменение
+    { min: 750, max: 1500, step: 100, "выигрышная цена": 850 }, // Enclose "выигрышная цена" in quotation marks
+    { min: 15000, max: 25000, step: 1000, "выигрышная цена": 19000 } // Enclose "выигрышная цена" in quotation marks
 ];
+
 
 const carCards = document.querySelectorAll('.car-card');
 const buyButtons = document.querySelectorAll('.car-card button');
